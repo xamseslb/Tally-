@@ -16,6 +16,7 @@ export default function TabsLayout() {
       <Tabs.Screen name="projects/index" options={{ title: t('tabs.projects') }} />
       <Tabs.Screen name="reports/index" options={{ title: t('tabs.reports') }} />
       <Tabs.Screen name="chat/index" options={{ title: t('tabs.chat') }} />
+      <Tabs.Screen name="settings/index" options={{ title: t('tabs.settings') }} />
     </Tabs>
   );
 }

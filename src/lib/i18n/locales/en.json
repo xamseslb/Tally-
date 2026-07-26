@@ -8,7 +8,15 @@
   "tabs": {
     "projects": "Projects",
     "reports": "Reports",
-    "chat": "Chat"
+    "chat": "Chat",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "deleteAccount": "Delete account",
+    "deleteConfirmTitle": "Delete your account?",
+    "deleteConfirmBody": "This cannot be undone. Your reports are kept as documentation, but your name is anonymised.",
+    "deleteFailed": "Could not delete account"
   },
   "auth": {
     "signIn": "Sign in",

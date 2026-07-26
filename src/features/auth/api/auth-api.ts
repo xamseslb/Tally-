@@ -30,3 +30,9 @@ export async function signOut(): Promise<Result<void>> {
   const { error } = await supabase.auth.signOut();
   return error ? err(mapAuthError(error.message)) : ok(undefined);
 }
+
+/** Kontosletting via Edge Function (anonymiserer forfatter, sletter auth-bruker). */
+export async function deleteAccount(): Promise<Result<void>> {
+  const { error } = await supabase.functions.invoke('delete-account', { method: 'POST' });
+  return error ? err('Kunne ikke slette konto. Prøv igjen når du har dekning.') : ok(undefined);
+}

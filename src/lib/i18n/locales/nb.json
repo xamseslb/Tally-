@@ -8,7 +8,15 @@
   "tabs": {
     "projects": "Prosjekter",
     "reports": "Rapporter",
-    "chat": "Chat"
+    "chat": "Chat",
+    "settings": "Innstillinger"
+  },
+  "settings": {
+    "title": "Innstillinger",
+    "deleteAccount": "Slett konto",
+    "deleteConfirmTitle": "Slette kontoen din?",
+    "deleteConfirmBody": "Dette kan ikke angres. Rapportene dine beholdes som dokumentasjon, men navnet ditt anonymiseres.",
+    "deleteFailed": "Kunne ikke slette konto"
   },
   "auth": {
     "signIn": "Logg inn",
