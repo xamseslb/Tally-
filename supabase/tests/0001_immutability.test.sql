@@ -1,11 +1,11 @@
--- pgTAP: beviser at signerte rapporter ikke kan endres (spec §3 FR-3, §9).
--- Kjøres med `npm run test:rls` (supabase test db). Full RLS-per-rolle-suite,
--- særlig Client-rollen, bygges ut i Fase 1.
+-- pgTAP: beviser at uforanderlighets-vakten er på plass (spec §3 FR-3, §9).
+-- Kjøres med `npm run test:rls` (supabase test db).
 begin;
-select plan(1);
+select plan(2);
 
--- Trigger-funksjonen skal finnes etter migrasjonene.
-select has_function('guard_signed_reports', 'guard_signed_reports finnes');
+-- Bruk entydige signaturer: has_function(schema, navn) og has_trigger(tabell, navn).
+select has_function('public'::name, 'guard_signed_reports'::name);
+select has_trigger('daily_reports'::name, 'trg_guard_signed'::name);
 
 select * from finish();
 rollback;
