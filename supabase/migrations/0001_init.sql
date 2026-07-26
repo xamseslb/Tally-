@@ -81,13 +81,18 @@ create table daily_reports (
   submitted_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  deleted_at timestamptz,
-  unique (
-    project_id,
-    author_id,
-    report_date,
-    coalesce(supersedes_id, '00000000-0000-0000-0000-000000000000'::uuid)
-  )
+  deleted_at timestamptz
+);
+
+-- Én rapport per prosjekt/forfatter/dato. Revisjoner (med supersedes_id) er egne
+-- rader; coalesce gjør at originalen (null) og hver revisjon får hver sin unike
+-- verdi. NB: uttrykk kan ikke stå i en table-constraint (spec §5 hadde dette som
+-- `unique (...)`, som gir syntaksfeil) — det må være et unique index.
+create unique index daily_reports_one_per_day on daily_reports (
+  project_id,
+  author_id,
+  report_date,
+  coalesce(supersedes_id, '00000000-0000-0000-0000-000000000000'::uuid)
 );
 
 create table report_manpower (

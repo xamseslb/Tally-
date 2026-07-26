@@ -14,12 +14,18 @@ Løpende logg over faser, beslutninger og gjenstående oppgaver.
 - CI: GitHub Actions (typecheck · lint · test)
 - Docs: SPEC.md, CLAUDE.md, ADR 0001/0002, PR-mal
 
+**Infrastruktur**
+
+- Supabase-prosjekt opprettet, region **West EU (Ireland), eu-west-1** (GDPR §4 dekket).
+  Prosjekt-ref: `vfpajecjqjwotuvyrbmm`. Klient-tilkobling verifisert 2026-07-26.
+- Bruker Supabases **nye nøkkelsystem**: publishable key (`sb_publishable_…`) i klient,
+  secret keys kun i Edge Functions. Legacy anon/service_role brukes ikke.
+
 **Gjenstår i Fase 0 (krever eksterne kontoer / valg)**
 
+- [ ] Kjør migrasjonene mot prosjektet (`0001_init` + `0002_rls`), generer typer (`database.ts`)
 - [ ] Last inn fontfiler (Archivo Condensed, Inter, IBM Plex Mono) — nå systemfont
 - [ ] Sentry: legg til `@sentry/react-native` + config-plugin, guardet init via `EXPO_PUBLIC_SENTRY_DSN`
-- [ ] Supabase-prosjekt i **EU-region**, kjør migrasjonene, generer typer (`database.ts`)
-- [ ] `npx supabase init` for lokal `config.toml`
 - [ ] Re-aktiver `typedRoutes` når appen først kjøres (genererer `.expo/types`)
 - [ ] EAS development build på fysisk iPhone (krever Apple Developer — §11 pkt 4)
 - [ ] Vurder Node 22 LTS
