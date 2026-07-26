@@ -42,14 +42,18 @@ Løpende logg over faser, beslutninger og gjenstående oppgaver.
   (`0002_rls_roles.test.sql`) som beviser Client-rollens begrensninger
 - CI-jobb `rls` kjører pgTAP i Docker (verifiseres når repoet får GitHub-remote)
 
-**⚠️ Viktig — gjenstår / uverifisert**
+**Kjørt mot prosjektet (2026-07-26):** `0003_rls_policies`, `0004_onboarding`.
+Funksjonell røyktest bestått: anon nektes lesing (tomt) og skriving (42501),
+`onboard_organization`-RPC deployet og avviser uinnloggede.
 
-- [ ] **RLS er UVERIFISERT lokalt** (ingen Docker → pgTAP ikke kjørt). Må verifiseres
-      før produksjon: installer Docker og kjør `npm run test:rls`, eller push til GitHub
-      så CI-jobben `rls` kjører. En RLS-bug er et datalekkasjeavvik (spec §9).
-- [ ] **Kjør `0003_rls_policies.sql` mot prosjektet** (SQL Editor) — ellers er alle
-      tabeller fortsatt deny-all og appen kan ikke lese/skrive data
-- [ ] Onboarding (opprett organisasjon + profil), invitasjon, kontosletting (Apple 5.1.1(v))
+**⚠️ Gjenstår / uverifisert**
+
+- [ ] **Full RLS-verifisering (pgTAP)** mangler fortsatt — den funksjonelle røyktesten
+      dekker anon, men ikke hele rollematrisen (Client kun signerte osv.). Kjør via
+      **Docker** (`npm run test:rls`) eller **GitHub CI** (jobben `rls`).
+- [ ] Kjør `0005_harden_onboarding.sql` (fjerner PUBLIC execute på RPC-en — valgfritt, herding)
+- [ ] Deploy `delete-account` edge function (`supabase functions deploy`)
+- [ ] Invitasjonsflyt (invitere medlemmer med rolle)
 
 ## Åpne avklaringer med kunden (spec §11 — før Fase 3)
 
