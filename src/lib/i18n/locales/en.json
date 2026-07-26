@@ -27,6 +27,12 @@
     "magicLinkSent": "Check your email — we sent a sign-in link.",
     "tagline": "The day's work, documented."
   },
+  "onboarding": {
+    "title": "Create organisation",
+    "subtitle": "Give your organisation a name to get started.",
+    "orgName": "Organisation name",
+    "create": "Create organisation"
+  },
   "empty": {
     "reports": "No report for today. Start today's report.",
     "projects": "No projects yet."

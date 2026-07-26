@@ -22,10 +22,12 @@ module.exports = defineConfig([
     },
   },
   {
-    // Tester får bruke console og andre testhjelpere fritt.
+    // Tester får bruke console og andre testhjelpere fritt. import/first er av
+    // fordi modulen-under-test ofte må importeres ETTER jest.mock (hoisting/TDZ).
     files: ['**/*.test.ts', '**/*.test.tsx', 'jest-setup.ts'],
     rules: {
       'no-console': 'off',
+      'import/first': 'off',
     },
   },
 ]);

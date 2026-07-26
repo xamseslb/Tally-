@@ -27,6 +27,12 @@
     "magicLinkSent": "Sjekk e-posten din — vi sendte en innloggingslenke.",
     "tagline": "Dagens arbeid, dokumentert."
   },
+  "onboarding": {
+    "title": "Opprett organisasjon",
+    "subtitle": "Gi organisasjonen din et navn for å komme i gang.",
+    "orgName": "Navn på organisasjon",
+    "create": "Opprett organisasjon"
+  },
   "empty": {
     "reports": "Ingen rapport for i dag. Start dagens rapport.",
     "projects": "Ingen prosjekter enda."
