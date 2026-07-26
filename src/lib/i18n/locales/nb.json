@@ -12,8 +12,12 @@
   },
   "auth": {
     "signIn": "Logg inn",
+    "signOut": "Logg ut",
     "email": "E-post",
-    "password": "Passord"
+    "password": "Passord",
+    "magicLink": "Send innloggingslenke",
+    "magicLinkSent": "Sjekk e-posten din — vi sendte en innloggingslenke.",
+    "tagline": "Dagens arbeid, dokumentert."
   },
   "empty": {
     "reports": "Ingen rapport for i dag. Start dagens rapport.",

@@ -1,11 +1,12 @@
 import '@/lib/i18n';
 
-import { Stack } from 'expo-router';
+import { Stack, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { type AuthStatus, useAuthStore } from '@/features/auth';
 import { colors } from '@/ui';
 
 // Error boundary på rotnivå (spec §4). Gjelder hele treet.
@@ -13,10 +14,32 @@ export { RouteError as ErrorBoundary } from '@/ui';
 
 void SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+/** Sender uinnloggede til innlogging og innloggede vekk fra auth-skjermene. */
+function useProtectedRoute(status: AuthStatus): void {
+  const segments = useSegments();
+  const router = useRouter();
   useEffect(() => {
-    void SplashScreen.hideAsync();
-  }, []);
+    if (status === 'loading') return;
+    const inAuthGroup = segments[0] === '(auth)';
+    if (status === 'signedOut' && !inAuthGroup) {
+      router.replace('/(auth)/sign-in');
+    } else if (status === 'signedIn' && inAuthGroup) {
+      router.replace('/(tabs)/reports');
+    }
+  }, [status, segments, router]);
+}
+
+export default function RootLayout() {
+  const status = useAuthStore((s) => s.status);
+  const initialize = useAuthStore((s) => s.initialize);
+
+  useEffect(() => initialize(), [initialize]);
+
+  useEffect(() => {
+    if (status !== 'loading') void SplashScreen.hideAsync();
+  }, [status]);
+
+  useProtectedRoute(status);
 
   return (
     <GestureHandlerRootView style={styles.root}>

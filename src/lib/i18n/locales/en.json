@@ -12,8 +12,12 @@
   },
   "auth": {
     "signIn": "Sign in",
+    "signOut": "Sign out",
     "email": "Email",
-    "password": "Password"
+    "password": "Password",
+    "magicLink": "Send sign-in link",
+    "magicLinkSent": "Check your email — we sent a sign-in link.",
+    "tagline": "The day's work, documented."
   },
   "empty": {
     "reports": "No report for today. Start today's report.",
