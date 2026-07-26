@@ -28,3 +28,19 @@ jobs:
 
       - name: Test
         run: npm test -- --ci
+
+  rls:
+    name: RLS pgTAP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start lokal Supabase (Docker)
+        run: supabase start
+
+      - name: Kjør pgTAP RLS-tester
+        run: supabase test db

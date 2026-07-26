@@ -32,6 +32,25 @@ Løpende logg over faser, beslutninger og gjenstående oppgaver.
 
 **Ferdig når:** CI grønn på tom app + EAS dev build kjører på fysisk iPhone.
 
+## Fase 1 — Auth, organisasjon, roller (pågår)
+
+**Gjort**
+
+- Auth-infrastruktur: session-store (Zustand) + secure-store, auth-gate i ruting
+- Innlogging: e-post/passord + magic link mot Supabase Auth, zod-validert, norske feil
+- RLS-policies på **alle** tabeller per rolle (`0003_rls_policies.sql`) + pgTAP-suite
+  (`0002_rls_roles.test.sql`) som beviser Client-rollens begrensninger
+- CI-jobb `rls` kjører pgTAP i Docker (verifiseres når repoet får GitHub-remote)
+
+**⚠️ Viktig — gjenstår / uverifisert**
+
+- [ ] **RLS er UVERIFISERT lokalt** (ingen Docker → pgTAP ikke kjørt). Må verifiseres
+      før produksjon: installer Docker og kjør `npm run test:rls`, eller push til GitHub
+      så CI-jobben `rls` kjører. En RLS-bug er et datalekkasjeavvik (spec §9).
+- [ ] **Kjør `0003_rls_policies.sql` mot prosjektet** (SQL Editor) — ellers er alle
+      tabeller fortsatt deny-all og appen kan ikke lese/skrive data
+- [ ] Onboarding (opprett organisasjon + profil), invitasjon, kontosletting (Apple 5.1.1(v))
+
 ## Åpne avklaringer med kunden (spec §11 — før Fase 3)
 
 Bransje/arbeidsdag · brukerantall · signaturnivå (dok vs BankID) · hvem betaler
