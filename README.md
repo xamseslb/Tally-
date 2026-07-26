@@ -1,56 +1,63 @@
-# Welcome to your Expo app 👋
+# Dagsverk
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Offline-first mobilapp (React Native / Expo) for daglig dokumentasjon på
+anleggs- og byggeplasser. En person med hansker, i regn, uten dekning, får
+loggført dagens arbeid med bilder på under to minutter — og ledelsen får en
+signert PDF ut av det.
 
-## Get started
+> **Kilde til sannhet:** [`docs/SPEC.md`](docs/SPEC.md) (krav, arkitektur,
+> byggeplan) og [`CLAUDE.md`](CLAUDE.md) (regler for utviklingen). Spec-en vinner
+> over antakelser.
 
-1. Install dependencies
+## Status
 
-   ```bash
-   npm install
-   ```
+**Fase 0 — Fundament.** Prosjektskjelett, design-system, kvalitetsvakter, CI og
+databaseskjema er på plass. Se `docs/SPEC.md` §8 for byggeplanen.
 
-2. Start the app
+## Krav
 
-   ```bash
-   npx expo start
-   ```
+- Node 22 LTS anbefalt (fungerer på 24, utenfor Expos støttede matrise)
+- iOS: fysisk iPhone + Expo Go / EAS development build
+- Supabase CLI (`npx supabase`) for lokal database
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Kom i gang
 
 ```bash
-npm run reset-project
+npm install --legacy-peer-deps
+cp .env.example .env   # fyll inn når Supabase/Sentry er koblet til
+npm start              # åpner Expo — trykk 'i' for iOS, 'a' for Android
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Skript
 
-### Other setup steps
+```bash
+npm run typecheck   # tsc --noEmit
+npm run lint        # eslint + prettier --check
+npm run lint:fix    # eslint --fix + prettier --write
+npm test            # jest
+npm run test:rls    # pgTAP mot lokal supabase
+npm run e2e         # maestro
+npm run db:reset    # kjør alle migrasjoner på nytt lokalt
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Kjør `typecheck`, `lint` og `test` før du sier at noe er ferdig.
 
-## Learn more
+## Struktur (spec §6)
 
-To learn more about developing your project with Expo, look at the following resources:
+```
+app/          expo-router (ruter). (auth), (tabs), report/[id]
+src/
+  features/   vertikale skiver: reports, media, sync, signatures
+  ui/         design-system: tokens + Button, Field, Text, StatusStripe, Screen
+  lib/        env, logger, i18n, supabase-klient
+  db/         WatermelonDB (Fase 2)
+  types/      delte domenetyper
+supabase/     migrasjoner, Edge Functions, pgTAP-tester
+e2e/          Maestro-flows
+docs/         SPEC.md, ADR/, RELEASE.md
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Neste steg
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+**Fase 1 — Auth, organisasjon, roller.** Se `docs/SPEC.md` §8 og
+`docs/RELEASE.md`. Krever tilkobling av Supabase (EU-region) og Apple Developer.

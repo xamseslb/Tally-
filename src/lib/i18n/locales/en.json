@@ -1,0 +1,22 @@
+{
+  "app": { "name": "Dagsverk" },
+  "common": {
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "tabs": {
+    "projects": "Projects",
+    "reports": "Reports",
+    "chat": "Chat"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "email": "Email",
+    "password": "Password"
+  },
+  "empty": {
+    "reports": "No report for today. Start today's report.",
+    "projects": "No projects yet."
+  }
+}

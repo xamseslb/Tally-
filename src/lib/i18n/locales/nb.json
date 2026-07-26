@@ -1,0 +1,22 @@
+{
+  "app": { "name": "Dagsverk" },
+  "common": {
+    "retry": "Prøv igjen",
+    "cancel": "Avbryt",
+    "save": "Lagre"
+  },
+  "tabs": {
+    "projects": "Prosjekter",
+    "reports": "Rapporter",
+    "chat": "Chat"
+  },
+  "auth": {
+    "signIn": "Logg inn",
+    "email": "E-post",
+    "password": "Passord"
+  },
+  "empty": {
+    "reports": "Ingen rapport for i dag. Start dagens rapport.",
+    "projects": "Ingen prosjekter enda."
+  }
+}

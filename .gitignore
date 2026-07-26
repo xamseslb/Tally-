@@ -7,7 +7,7 @@ node_modules/
 .expo/
 dist/
 web-build/
-expo-env.d.ts
+# expo-env.d.ts committes bevisst (tsconfig include refererer den)
 
 # Native
 .kotlin/
@@ -30,8 +30,12 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
+# local env files (aldri commit hemmeligheter)
+.env
 .env*.local
+
+# test coverage
+coverage/
 
 # typescript
 *.tsbuildinfo
