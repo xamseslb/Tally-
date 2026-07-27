@@ -27,7 +27,9 @@ export default function OversiktScreen() {
           data={reports}
           keyExtractor={(r) => r.id}
           contentContainerStyle={styles.content}
-          renderItem={({ item }) => <ReportCard report={item} />}
+          renderItem={({ item }) => (
+            <ReportCard report={item} onPress={() => router.push(`/report/${item.id}`)} />
+          )}
           ListHeaderComponent={
             <View style={styles.headerBlock}>
               <Header

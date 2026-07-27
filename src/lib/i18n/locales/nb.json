@@ -48,7 +48,20 @@
     "workPerformed": "Utført arbeid",
     "saveDraft": "Lagre utkast",
     "needProject": "Du trenger et prosjekt først",
-    "needProjectBody": "Opprett et prosjekt for å kunne lage en rapport."
+    "needProjectBody": "Opprett et prosjekt for å kunne lage en rapport.",
+    "title": "Rapport",
+    "submit": "Levér rapport",
+    "sign": "Signér rapport",
+    "reject": "Avvis",
+    "rejectTitle": "Avvise rapporten?",
+    "rejectPrompt": "Rapporten går tilbake til utkast. Legg til en begrunnelse.",
+    "signTitle": "Signere denne rapporten?",
+    "signBody": "Du signerer på at arbeidet stemmer. Dette registreres med navnet ditt og server-tiden, og rapporten låses.",
+    "locked": "Denne rapporten er signert og låst. Rettelser gjøres som revisjon.",
+    "signedBy": "Signert av",
+    "documentHash": "Dokument-hash",
+    "returnedNote": "Returnert med kommentar",
+    "noWork": "Ingen arbeid beskrevet."
   },
   "chat": {
     "empty": "Ingen meldinger enda."

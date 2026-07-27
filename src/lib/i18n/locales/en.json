@@ -48,7 +48,20 @@
     "workPerformed": "Work performed",
     "saveDraft": "Save draft",
     "needProject": "You need a project first",
-    "needProjectBody": "Create a project to be able to make a report."
+    "needProjectBody": "Create a project to be able to make a report.",
+    "title": "Report",
+    "submit": "Submit report",
+    "sign": "Sign report",
+    "reject": "Reject",
+    "rejectTitle": "Reject report?",
+    "rejectPrompt": "The report goes back to draft. Add a reason.",
+    "signTitle": "Sign this report?",
+    "signBody": "You sign that the work described is correct. This is recorded with your name and the server time, and the report is locked.",
+    "locked": "This report is signed and locked. Corrections are made as a revision.",
+    "signedBy": "Signed by",
+    "documentHash": "Document hash",
+    "returnedNote": "Returned with note",
+    "noWork": "No work described."
   },
   "chat": {
     "empty": "No messages yet."
