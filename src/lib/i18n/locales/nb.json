@@ -24,12 +24,31 @@
     "archived": "Arkiverte",
     "all": "Alle",
     "newProject": "Nytt prosjekt",
-    "empty": "Ingen prosjekter enda."
+    "empty": "Ingen prosjekter enda.",
+    "name": "Prosjektnavn",
+    "number": "Prosjektnummer (valgfritt)",
+    "address": "Adresse (valgfritt)",
+    "client": "Byggherre (valgfritt)",
+    "create": "Opprett prosjekt"
+  },
+  "projectStatus": {
+    "active": "Aktiv",
+    "paused": "Pauset",
+    "completed": "Avsluttet",
+    "archived": "Arkivert"
   },
   "reportStatus": {
     "draft": "Utkast",
     "submitted": "Levert",
-    "signed": "Signert"
+    "signed": "Signert",
+    "rejected": "Avvist"
+  },
+  "report": {
+    "project": "Prosjekt",
+    "workPerformed": "Utført arbeid",
+    "saveDraft": "Lagre utkast",
+    "needProject": "Du trenger et prosjekt først",
+    "needProjectBody": "Opprett et prosjekt for å kunne lage en rapport."
   },
   "chat": {
     "empty": "Ingen meldinger enda."

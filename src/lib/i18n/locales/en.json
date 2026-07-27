@@ -24,12 +24,31 @@
     "archived": "Archived",
     "all": "All",
     "newProject": "New project",
-    "empty": "No projects yet."
+    "empty": "No projects yet.",
+    "name": "Project name",
+    "number": "Project number (optional)",
+    "address": "Address (optional)",
+    "client": "Client (optional)",
+    "create": "Create project"
+  },
+  "projectStatus": {
+    "active": "Active",
+    "paused": "Paused",
+    "completed": "Completed",
+    "archived": "Archived"
   },
   "reportStatus": {
     "draft": "Draft",
     "submitted": "Submitted",
-    "signed": "Signed"
+    "signed": "Signed",
+    "rejected": "Rejected"
+  },
+  "report": {
+    "project": "Project",
+    "workPerformed": "Work performed",
+    "saveDraft": "Save draft",
+    "needProject": "You need a project first",
+    "needProjectBody": "Create a project to be able to make a report."
   },
   "chat": {
     "empty": "No messages yet."

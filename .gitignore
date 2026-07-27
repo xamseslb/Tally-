@@ -37,6 +37,9 @@ yarn-error.*
 # test coverage
 coverage/
 
+# midlertidige dev-scripts (lokal db-applier o.l.)
+_*.mjs
+
 # typescript
 *.tsbuildinfo
 

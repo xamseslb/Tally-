@@ -6,7 +6,7 @@ const expoConfig = require('eslint-config-expo/flat');
 module.exports = defineConfig([
   expoConfig,
   {
-    ignores: ['dist/*', 'node_modules/*', '.expo/*', 'coverage/*', 'supabase/*'],
+    ignores: ['dist/*', 'node_modules/*', '.expo/*', 'coverage/*', 'supabase/*', '_*.mjs'],
   },
   {
     // Unngå at eslint-plugin-react prøver å autodetektere versjon via filsystemet.

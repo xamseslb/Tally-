@@ -3,10 +3,10 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { NewReportForm } from '@/features/reports';
+import { CreateProjectForm } from '@/features/projects';
 import { Screen, Text, colors, spacing } from '@/ui';
 
-export default function NewReportScreen() {
+export default function NewProjectScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   return (
@@ -15,9 +15,9 @@ export default function NewReportScreen() {
         <Pressable onPress={() => router.back()} accessibilityLabel="Tilbake" hitSlop={8}>
           <Ionicons name="chevron-back" size={26} color={colors.ink} />
         </Pressable>
-        <Text variant="title">{t('overview.newReport')}</Text>
+        <Text variant="title">{t('projects.newProject')}</Text>
       </View>
-      <NewReportForm onCreated={() => router.back()} />
+      <CreateProjectForm onCreated={() => router.back()} />
     </Screen>
   );
 }
