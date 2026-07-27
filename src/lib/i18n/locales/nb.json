@@ -6,10 +6,33 @@
     "save": "Lagre"
   },
   "tabs": {
+    "oversikt": "Oversikt",
     "projects": "Prosjekter",
     "reports": "Rapporter",
     "chat": "Chat",
-    "settings": "Innstillinger"
+    "settings": "Innstillinger",
+    "profil": "Profil"
+  },
+  "overview": {
+    "myReports": "Mine rapporter",
+    "newReport": "Ny rapport",
+    "empty": "Ingen rapporter enda. Trykk «Ny rapport» for å starte dagens rapport."
+  },
+  "projects": {
+    "search": "Søk prosjekter",
+    "active": "Aktive",
+    "archived": "Arkiverte",
+    "all": "Alle",
+    "newProject": "Nytt prosjekt",
+    "empty": "Ingen prosjekter enda."
+  },
+  "reportStatus": {
+    "draft": "Utkast",
+    "submitted": "Levert",
+    "signed": "Signert"
+  },
+  "chat": {
+    "empty": "Ingen meldinger enda."
   },
   "settings": {
     "title": "Innstillinger",

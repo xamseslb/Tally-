@@ -12,11 +12,8 @@ export interface StatusStripeProps {
 }
 
 /**
- * Synkstripen (spec §7): 4 pt stripe i toppen, alltid synlig. Svarer på det
- * reelle spørsmålet i en offline-app — «kom dataene mine frem?» — uten modal.
- *
- * Dette er primitiv-versjonen. Sperrebånd-animasjon og trykkbar synklogg
- * bygges ut i Fase 6 (offline-herding).
+ * Synkstripen (spec §7): tynn stripe som viser synkstatus. Brukes nå kun der
+ * det er relevant (offline-banner bygges i Fase 6). Grønn = synket.
  */
 export function StatusStripe({ state, pendingCount = 0, onPress }: StatusStripeProps) {
   const label = LABELS[state](pendingCount);
@@ -39,8 +36,8 @@ export function StatusStripe({ state, pendingCount = 0, onPress }: StatusStripeP
 }
 
 const STATE_COLOR: Record<SyncState, string> = {
-  synced: colors.hivis,
-  pending: colors.signal,
+  synced: colors.success,
+  pending: colors.warning,
   error: colors.alert,
 };
 
@@ -51,5 +48,5 @@ const LABELS: Record<SyncState, (count: number) => string> = {
 };
 
 const styles = StyleSheet.create({
-  stripe: { height: 4, width: '100%' },
+  stripe: { height: 3, width: '100%' },
 });

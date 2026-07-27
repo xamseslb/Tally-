@@ -1,5 +1,8 @@
+export { Badge, type BadgeProps, type BadgeTone } from './Badge';
 export { Button, type ButtonProps } from './Button';
+export { Card, type CardProps } from './Card';
 export { Field, type FieldProps } from './Field';
+export { Header, type HeaderProps } from './Header';
 export { RouteError } from './RouteError';
 export { Screen, type ScreenProps } from './Screen';
 export { StatusStripe, type StatusStripeProps, type SyncState } from './StatusStripe';

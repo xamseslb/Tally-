@@ -2,7 +2,7 @@ import { Text as RNText, StyleSheet, type TextProps } from 'react-native';
 
 import { colors, type ColorToken, fontFamily, fontSize, fontWeight, lineHeight } from './tokens';
 
-type Variant = 'display' | 'title' | 'body' | 'label' | 'mono' | 'small';
+type Variant = 'display' | 'title' | 'heading' | 'body' | 'label' | 'mono' | 'small';
 
 export interface AppTextProps extends TextProps {
   variant?: Variant;
@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
     fontSize: fontSize.title,
     lineHeight: lineHeight.title,
     fontWeight: fontWeight.bold,
+  },
+  heading: {
+    fontFamily: fontFamily.body,
+    fontSize: fontSize.heading,
+    lineHeight: lineHeight.heading,
+    fontWeight: fontWeight.semibold,
   },
   body: {
     fontFamily: fontFamily.body,

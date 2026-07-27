@@ -6,10 +6,33 @@
     "save": "Save"
   },
   "tabs": {
+    "oversikt": "Overview",
     "projects": "Projects",
     "reports": "Reports",
     "chat": "Chat",
-    "settings": "Settings"
+    "settings": "Settings",
+    "profil": "Profile"
+  },
+  "overview": {
+    "myReports": "My reports",
+    "newReport": "New report",
+    "empty": "No reports yet. Tap “New report” to start today's report."
+  },
+  "projects": {
+    "search": "Search projects",
+    "active": "Active",
+    "archived": "Archived",
+    "all": "All",
+    "newProject": "New project",
+    "empty": "No projects yet."
+  },
+  "reportStatus": {
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "signed": "Signed"
+  },
+  "chat": {
+    "empty": "No messages yet."
   },
   "settings": {
     "title": "Settings",

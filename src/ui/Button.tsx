@@ -13,7 +13,7 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'style'> 
 
 /**
  * Primærknapp. Knappetekst = handlingen som skjer (spec §7): «Levér rapport».
- * Minste treffområde 48 pt (spec §4). accessibilityLabel settes fra label.
+ * Full bredde, grønn merkevarefarge (mockup). Minste treffområde 48 pt.
  */
 export function Button({
   label,
@@ -43,7 +43,7 @@ export function Button({
         {loading ? (
           <ActivityIndicator color={palette.fg} />
         ) : (
-          <Text variant="label" style={{ color: palette.fg }}>
+          <Text variant="heading" style={{ color: palette.fg, fontWeight: '600' }}>
             {label}
           </Text>
         )}
@@ -53,9 +53,9 @@ export function Button({
 }
 
 const VARIANTS: Record<Variant, { bg: string; fg: string; border: string }> = {
-  primary: { bg: colors.signal, fg: colors.onSignal, border: colors.signal },
-  secondary: { bg: colors.paper, fg: colors.ink, border: colors.slate },
-  danger: { bg: colors.alert, fg: colors.onAlert, border: colors.alert },
+  primary: { bg: colors.brand, fg: colors.onBrand, border: colors.brand },
+  secondary: { bg: colors.surface, fg: colors.ink, border: colors.line },
+  danger: { bg: colors.surface, fg: colors.alert, border: colors.alert },
 };
 
 const styles = StyleSheet.create({
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     minHeight: a11y.minTouchTarget,
     borderRadius: radius.md,
     borderWidth: 1,
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.xl,
     justifyContent: 'center',
   },
   content: {

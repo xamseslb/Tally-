@@ -1,30 +1,36 @@
 import { type ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { type Edge, SafeAreaView } from 'react-native-safe-area-context';
 
-import { StatusStripe, type SyncState } from './StatusStripe';
 import { colors, spacing } from './tokens';
 
 export interface ScreenProps {
   children: ReactNode;
-  /** Synkstripen ligger alltid øverst (spec §7). */
-  syncState?: SyncState;
-  pendingCount?: number;
+  /** Rull innhold vertikalt (lister, lange skjemaer). */
+  scroll?: boolean;
   edges?: readonly Edge[];
 }
 
-/** Standard skjermramme: synkstripe øverst, trygt område, rolig bakgrunn. */
+/** Standard skjermramme: trygt område, rolig grå bakgrunn (mockup). */
 export function Screen({
   children,
-  syncState = 'synced',
-  pendingCount,
-  edges = ['top', 'left', 'right', 'bottom'],
+  scroll = false,
+  edges = ['top', 'left', 'right'],
 }: ScreenProps) {
   return (
     <View style={styles.root}>
-      <StatusStripe state={syncState} pendingCount={pendingCount} />
       <SafeAreaView style={styles.safe} edges={edges}>
-        <View style={styles.content}>{children}</View>
+        {scroll ? (
+          <ScrollView
+            style={styles.flex}
+            contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
+          >
+            {children}
+          </ScrollView>
+        ) : (
+          <View style={[styles.flex, styles.content]}>{children}</View>
+        )}
       </SafeAreaView>
     </View>
   );
@@ -33,5 +39,6 @@ export function Screen({
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.paper },
   safe: { flex: 1 },
-  content: { flex: 1, padding: spacing.lg, gap: spacing.md },
+  flex: { flex: 1 },
+  content: { padding: spacing.lg, gap: spacing.lg },
 });
