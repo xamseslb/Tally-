@@ -1,12 +1,13 @@
--- pgTAP: beviser rollemodellen (spec §2/§9). Kjøres med `npm run test:rls`
--- (supabase test db) — krever Docker/lokal supabase eller CI-jobben `rls`.
+-- pgTAP: beviser rollemodellen (spec §2/§9). Kjøres med `npm run test:rls`.
 --
--- Fokus: Client-rollen er den farligste. Den skal KUN se signerte rapporter på
--- egne prosjekter, og ingen chat.
+-- Mønster: pgTAP-funksjoner (is/plan/finish) MÅ kalles som superuser, ellers
+-- nektes de tilgang til pgTAPs interne tabeller. Vi bytter derfor til rollen
+-- `authenticated` KUN for å samle RLS-filtrerte tellinger inn i temp-tabeller,
+-- bytter tilbake, og gjør assertions som superuser.
 begin;
 select plan(4);
 
--- === Seed (som postgres — superuser omgår RLS) ===
+-- === Seed (som superuser — omgår RLS) ===
 insert into auth.users (id, email) values
   ('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', 'admin@a.no'),
   ('cccccccc-cccc-cccc-cccc-cccccccccccc', 'client@a.no'),
@@ -42,41 +43,35 @@ insert into channels (id, organization_id, project_id, name) values
   ('55555555-5555-5555-5555-555555555555', '11111111-1111-1111-1111-111111111111',
    '22222222-2222-2222-2222-222222222222', 'Prosjektchat');
 
--- === Act som CLIENT ===
+-- === Samle CLIENT-synlighet (RLS) ===
 set local role authenticated;
 select set_config(
   'request.jwt.claims',
   json_build_object('sub', 'cccccccc-cccc-cccc-cccc-cccccccccccc')::text,
   true
 );
+create temp table client_view as
+select
+  (select count(*) from daily_reports) as reports,
+  (select count(*) from daily_reports where status = 'draft') as drafts,
+  (select count(*) from channels) as channels;
 
-select is(
-  (select count(*)::int from daily_reports),
-  1,
-  'Client ser kun 1 rapport (den signerte)'
-);
-select is(
-  (select count(*)::int from daily_reports where status = 'draft'),
-  0,
-  'Client ser INGEN utkast'
-);
-select is(
-  (select count(*)::int from channels),
-  0,
-  'Client ser ingen chat-kanaler'
-);
-
--- === Act som WORKER (medlem, forfatter) ===
+-- === Samle WORKER-synlighet (RLS) ===
 select set_config(
   'request.jwt.claims',
   json_build_object('sub', 'dddddddd-dddd-dddd-dddd-dddddddddddd')::text,
   true
 );
-select is(
-  (select count(*)::int from daily_reports),
-  2,
-  'Worker ser begge sine rapporter (utkast + signert)'
-);
+create temp table worker_view as
+select (select count(*) from daily_reports) as reports;
+
+-- === Tilbake til superuser for pgTAP-assertions ===
+reset role;
+
+select is((select reports from client_view)::int, 1, 'Client ser kun 1 rapport (den signerte)');
+select is((select drafts from client_view)::int, 0, 'Client ser INGEN utkast');
+select is((select channels from client_view)::int, 0, 'Client ser ingen chat-kanaler');
+select is((select reports from worker_view)::int, 2, 'Worker ser begge sine rapporter');
 
 select * from finish();
 rollback;
