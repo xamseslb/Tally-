@@ -40,20 +40,26 @@ Løpende logg over faser, beslutninger og gjenstående oppgaver.
 - Innlogging: e-post/passord + magic link mot Supabase Auth, zod-validert, norske feil
 - RLS-policies på **alle** tabeller per rolle (`0003_rls_policies.sql`) + pgTAP-suite
   (`0002_rls_roles.test.sql`) som beviser Client-rollens begrensninger
-- CI-jobb `rls` kjører pgTAP i Docker (verifiseres når repoet får GitHub-remote)
+- Onboarding: opprett organisasjon (atomisk RPC), medlemskaps-gate, kontosletting
 
-**Kjørt mot prosjektet (2026-07-26):** `0003_rls_policies`, `0004_onboarding`.
-Funksjonell røyktest bestått: anon nektes lesing (tomt) og skriving (42501),
-`onboard_organization`-RPC deployet og avviser uinnloggede.
+**✅ RLS VERIFISERT (2026-07-27)** — pgTAP grønt både lokalt (Docker) og i GitHub CI:
+0001 2/2 (trigger/funksjon finnes), 0002 4/4 (Client ser kun signerte rapporter,
+ingen chat; Worker ser begge sine). GitHub-repo: `xamseslb/Tally-`, CI helt grønn.
 
-**⚠️ Gjenstår / uverifisert**
+**Kjørt mot prosjektet:** `0001`–`0005`. `0006_grants` (tabell-grants) er kjørt
+lokalt/CI; **bør også kjøres på remote** for ledger-konsistens (redundant der,
+siden hosted Supabase gir grants implisitt — men hold fila og DB i synk).
 
-- [ ] **Full RLS-verifisering (pgTAP)** mangler fortsatt — den funksjonelle røyktesten
-      dekker anon, men ikke hele rollematrisen (Client kun signerte osv.). Kjør via
-      **Docker** (`npm run test:rls`) eller **GitHub CI** (jobben `rls`).
-- [ ] Kjør `0005_harden_onboarding.sql` (fjerner PUBLIC execute på RPC-en — valgfritt, herding)
+**Windows-notat:** `supabase test db` og `gen types` feiler lokalt (Docker/podman-
+quirk). pgTAP kjøres lokalt via en direkte `pg`-tilkobling til port 54322 i stedet.
+CI (Linux) kjører `supabase test db` uten problem.
+
+**Gjenstår i Fase 1**
+
+- [ ] Kjør `0006_grants.sql` på remote (konsistens)
 - [ ] Deploy `delete-account` edge function (`supabase functions deploy`)
 - [ ] Invitasjonsflyt (invitere medlemmer med rolle)
+- [ ] Generér `src/types/database.ts` (utsatt — CLI-quirk; vi validerer med zod i mellomtiden)
 
 ## Åpne avklaringer med kunden (spec §11 — før Fase 3)
 
