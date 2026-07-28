@@ -4,6 +4,8 @@ import { Alert, View } from 'react-native';
 
 import { deleteAccount, signOut, useAuth } from '@/features/auth';
 import { useMembershipStore } from '@/features/organizations';
+import { exportReportsToExcel } from '@/features/reports';
+import { notify } from '@/lib/confirm';
 import { Button, Card, Header, Screen, Text, spacing } from '@/ui';
 
 /** Profil — konto, teamadministrasjon, utlogging og kontosletting. */
@@ -47,6 +49,18 @@ export default function ProfilScreen() {
           label={t('team.manage')}
           variant="secondary"
           onPress={() => router.push('/admin/users')}
+        />
+      ) : null}
+
+      {canManage ? (
+        <Button
+          label={t('settings.exportExcel')}
+          variant="secondary"
+          onPress={() => {
+            void exportReportsToExcel().then((r) => {
+              if (!r.ok) notify(r.error);
+            });
+          }}
         />
       ) : null}
 

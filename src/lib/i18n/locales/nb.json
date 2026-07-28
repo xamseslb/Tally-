@@ -110,6 +110,7 @@
   },
   "settings": {
     "title": "Innstillinger",
+    "exportExcel": "Eksporter rapporter (Excel)",
     "deleteAccount": "Slett konto",
     "deleteConfirmTitle": "Slette kontoen din?",
     "deleteConfirmBody": "Dette kan ikke angres. Rapportene dine beholdes som dokumentasjon, men navnet ditt anonymiseres.",

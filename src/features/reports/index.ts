@@ -23,6 +23,7 @@ export { ReportFieldsView } from './ui/ReportFieldsView';
 export { ReportLineItems } from './ui/ReportLineItems';
 export { ReportAttachments } from './ui/ReportAttachments';
 export { uploadAttachment, removeAttachment, getSignedUrl } from './api/attachments-api';
+export { exportReportsToExcel } from './api/export-api';
 export { createReportSchema, type CreateReportInput, type ReportStatus } from './model/schemas';
 export { NewReportForm } from './ui/NewReportForm';
 export { ReportCard } from './ui/ReportCard';
