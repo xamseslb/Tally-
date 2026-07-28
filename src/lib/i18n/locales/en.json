@@ -82,7 +82,9 @@
     "equipmentName": "Equipment name",
     "materialName": "Material name",
     "quantity": "Quantity",
-    "unit": "Unit"
+    "unit": "Unit",
+    "photos": "Photos & video",
+    "addPhoto": "Add photo / video"
   },
   "chat": {
     "empty": "No messages yet."

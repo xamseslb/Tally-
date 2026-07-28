@@ -61,9 +61,19 @@ const MaterialSchema = z.object({
   quantity: z.coerce.number().nullable(),
   unit: z.string().nullable(),
 });
+const AttachmentSchema = z.object({
+  id: z.string(),
+  storage_path: z.string().nullable(),
+  kind: z.string(),
+  caption: z.string().nullable(),
+  captured_at: z.string().nullable(),
+  lat: z.coerce.number().nullable(),
+  lng: z.coerce.number().nullable(),
+});
 export type ManpowerRow = z.infer<typeof ManpowerSchema>;
 export type EquipmentRow = z.infer<typeof EquipmentSchema>;
 export type MaterialRow = z.infer<typeof MaterialSchema>;
+export type AttachmentRow = z.infer<typeof AttachmentSchema>;
 
 const ReportDetailSchema = z.object({
   id: z.string(),
@@ -83,11 +93,12 @@ const ReportDetailSchema = z.object({
   manpower: z.array(ManpowerSchema),
   equipment: z.array(EquipmentSchema),
   materials: z.array(MaterialSchema),
+  attachments: z.array(AttachmentSchema),
 });
 export type ReportDetail = z.infer<typeof ReportDetailSchema>;
 
 const REPORT_DETAIL_COLUMNS =
-  'id, report_date, status, work_performed, delays, hse_notes, quality_notes, supervisor_comment, notes, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash), manpower:report_manpower(id, trade, headcount, hours), equipment:report_equipment(id, name, hours), materials:report_materials(id, name, quantity, unit)';
+  'id, report_date, status, work_performed, delays, hse_notes, quality_notes, supervisor_comment, notes, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash), manpower:report_manpower(id, trade, headcount, hours), equipment:report_equipment(id, name, hours), materials:report_materials(id, name, quantity, unit), attachments(id, storage_path, kind, caption, captured_at, lat, lng)';
 
 export async function getReport(id: string): Promise<Result<ReportDetail | null>> {
   const { data, error } = await supabase

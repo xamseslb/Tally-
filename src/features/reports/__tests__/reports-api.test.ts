@@ -122,6 +122,7 @@ describe('reports-api', () => {
         manpower: [{ id: 'm1', trade: 'Betong', headcount: 3, hours: 8 }],
         equipment: [],
         materials: [],
+        attachments: [],
       },
       error: null,
     });

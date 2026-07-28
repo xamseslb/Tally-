@@ -7,6 +7,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { useAuth } from '@/features/auth';
 import {
   EditReportForm,
+  ReportAttachments,
   ReportFieldsView,
   ReportLineItems,
   type ReportDetail,
@@ -142,6 +143,8 @@ function Content({
       )}
 
       <ReportLineItems report={report} editable={editable} onChanged={onSaved} />
+
+      <ReportAttachments report={report} editable={editable} onChanged={onSaved} />
 
       {report.review_note ? (
         <Card>

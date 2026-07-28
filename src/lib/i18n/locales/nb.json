@@ -82,7 +82,9 @@
     "equipmentName": "Utstyr",
     "materialName": "Materiale",
     "quantity": "Mengde",
-    "unit": "Enhet"
+    "unit": "Enhet",
+    "photos": "Bilder og video",
+    "addPhoto": "Legg til bilde / video"
   },
   "chat": {
     "empty": "Ingen meldinger enda."
