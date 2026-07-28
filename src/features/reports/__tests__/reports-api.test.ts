@@ -27,6 +27,7 @@ import {
   addManpower,
   createDraftReport,
   getReport,
+  listProjectReports,
   listReports,
   rejectReport,
   removeLineItem,
@@ -51,6 +52,24 @@ describe('reports-api', () => {
 
   it('updateReport lagrer feltene', async () => {
     expect((await updateReport('r1', { workPerformed: 'Støp', delays: 'Regn' })).ok).toBe(true);
+  });
+
+  it('listProjectReports henter prosjektets rapporter', async () => {
+    mockOrder.mockResolvedValue({
+      data: [
+        {
+          id: 'r1',
+          report_date: '2026-07-23',
+          status: 'draft',
+          work_performed: 'x',
+          projects: { name: 'Bygg A' },
+        },
+      ],
+      error: null,
+    });
+    const result = await listProjectReports('p1');
+    expect(result.ok).toBe(true);
+    if (result.ok) expect(result.value).toHaveLength(1);
   });
 
   it('addManpower legger til en bemanningslinje', async () => {

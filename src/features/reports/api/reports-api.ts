@@ -26,6 +26,19 @@ export async function listReports(): Promise<Result<ReportRow[]>> {
   return parsed.success ? ok(parsed.data) : err('Uventet svar fra server.');
 }
 
+export async function listProjectReports(projectId: string): Promise<Result<ReportRow[]>> {
+  const { data, error } = await supabase
+    .from('daily_reports')
+    .select('id, report_date, status, work_performed, projects(name)')
+    .eq('project_id', projectId)
+    .is('deleted_at', null)
+    .order('report_date', { ascending: false });
+
+  if (error) return err('Could not load the reports.');
+  const parsed = z.array(ReportSchema).safeParse(data ?? []);
+  return parsed.success ? ok(parsed.data) : err('Unexpected response from server.');
+}
+
 export async function createDraftReport(input: CreateReportInput): Promise<Result<string>> {
   const { data, error } = await supabase.rpc('create_draft_report', {
     p_project_id: input.projectId,

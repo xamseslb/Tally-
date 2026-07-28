@@ -11,7 +11,13 @@ import { Button, Card, Field, Text, colors, radius, spacing } from '@/ui';
 import { createDraftReport } from '../api/reports-api';
 import { createReportSchema, type CreateReportInput } from '../model/schemas';
 
-export function NewReportForm({ onCreated }: { onCreated: () => void }) {
+export function NewReportForm({
+  onCreated,
+  defaultProjectId,
+}: {
+  onCreated: () => void;
+  defaultProjectId?: string;
+}) {
   const { t } = useTranslation();
   const router = useRouter();
   const { projects, refetch } = useProjects();
@@ -22,10 +28,10 @@ export function NewReportForm({ onCreated }: { onCreated: () => void }) {
     formState: { errors, isSubmitting },
   } = useForm<CreateReportInput>({
     resolver: zodResolver(createReportSchema),
-    defaultValues: { projectId: '', workPerformed: '' },
+    defaultValues: { projectId: defaultProjectId ?? '', workPerformed: '' },
   });
   const [formError, setFormError] = useState<string | null>(null);
-  const [selected, setSelected] = useState('');
+  const [selected, setSelected] = useState(defaultProjectId ?? '');
 
   const selectProject = (id: string) => {
     setSelected(id);

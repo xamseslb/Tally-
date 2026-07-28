@@ -32,7 +32,8 @@
     "create": "Opprett prosjekt",
     "editTitle": "Rediger prosjekt",
     "save": "Lagre endringer",
-    "statusLabel": "Status"
+    "statusLabel": "Status",
+    "reports": "Rapporter"
   },
   "projectStatus": {
     "active": "Aktiv",

@@ -32,7 +32,8 @@
     "create": "Create project",
     "editTitle": "Edit project",
     "save": "Save changes",
-    "statusLabel": "Status"
+    "statusLabel": "Status",
+    "reports": "Reports"
   },
   "projectStatus": {
     "active": "Active",
