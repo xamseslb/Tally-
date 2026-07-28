@@ -29,7 +29,10 @@
     "number": "Project number (optional)",
     "address": "Address (optional)",
     "client": "Client (optional)",
-    "create": "Create project"
+    "create": "Create project",
+    "editTitle": "Edit project",
+    "save": "Save changes",
+    "statusLabel": "Status"
   },
   "projectStatus": {
     "active": "Active",

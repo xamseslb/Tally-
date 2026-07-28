@@ -40,7 +40,9 @@ export default function ProsjekterScreen() {
           data={visible}
           keyExtractor={(p) => p.id}
           contentContainerStyle={styles.content}
-          renderItem={({ item }) => <ProjectCard project={item} />}
+          renderItem={({ item }) => (
+            <ProjectCard project={item} onPress={() => router.push(`/project/${item.id}`)} />
+          )}
           ListHeaderComponent={
             <View style={styles.headerBlock}>
               <Header

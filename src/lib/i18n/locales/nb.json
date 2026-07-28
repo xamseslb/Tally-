@@ -29,7 +29,10 @@
     "number": "Prosjektnummer (valgfritt)",
     "address": "Adresse (valgfritt)",
     "client": "Byggherre (valgfritt)",
-    "create": "Opprett prosjekt"
+    "create": "Opprett prosjekt",
+    "editTitle": "Rediger prosjekt",
+    "save": "Lagre endringer",
+    "statusLabel": "Status"
   },
   "projectStatus": {
     "active": "Aktiv",
