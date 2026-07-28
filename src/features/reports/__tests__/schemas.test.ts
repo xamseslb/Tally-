@@ -1,23 +1,22 @@
-import { createReportSchema } from '../model/schemas';
+import { createReportSchema, editReportSchema } from '../model/schemas';
 
 describe('createReportSchema', () => {
-  it('godtar gyldig rapport', () => {
-    const r = createReportSchema.safeParse({
-      projectId: 'p1',
-      workPerformed: 'Forskaling av vegg',
-    });
-    expect(r.success).toBe(true);
+  it('godtar et valgt prosjekt', () => {
+    expect(createReportSchema.safeParse({ projectId: 'p1' }).success).toBe(true);
   });
 
   it('krever prosjekt', () => {
-    expect(createReportSchema.safeParse({ projectId: '', workPerformed: 'noe' }).success).toBe(
-      false,
-    );
+    expect(createReportSchema.safeParse({ projectId: '' }).success).toBe(false);
+  });
+});
+
+describe('editReportSchema', () => {
+  it('godtar tomme/valgfrie felt', () => {
+    expect(editReportSchema.safeParse({}).success).toBe(true);
   });
 
-  it('krever utført arbeid', () => {
-    expect(createReportSchema.safeParse({ projectId: 'p1', workPerformed: '' }).success).toBe(
-      false,
-    );
+  it('godtar utfylte felt', () => {
+    const r = editReportSchema.safeParse({ workPerformed: 'Støp', delays: 'Regn', notes: 'ok' });
+    expect(r.success).toBe(true);
   });
 });

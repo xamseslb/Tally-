@@ -43,7 +43,7 @@ export async function createDraftReport(input: CreateReportInput): Promise<Resul
   const { data, error } = await supabase.rpc('create_draft_report', {
     p_project_id: input.projectId,
     p_report_date: null,
-    p_work_performed: input.workPerformed,
+    p_work_performed: null,
   });
 
   if (error) return err(error.message || 'Kunne ikke opprette rapport. Prøv igjen.');

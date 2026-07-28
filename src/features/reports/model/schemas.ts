@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
 export const createReportSchema = z.object({
-  projectId: z.string().min(1, 'Velg et prosjekt'),
-  workPerformed: z.string().min(1, 'Skriv hva som ble utført'),
+  projectId: z.string().min(1, 'Select a project'),
 });
 export type CreateReportInput = z.infer<typeof createReportSchema>;
 

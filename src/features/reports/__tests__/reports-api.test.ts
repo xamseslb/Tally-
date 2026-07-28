@@ -100,7 +100,7 @@ describe('reports-api', () => {
 
   it('createDraftReport returnerer id', async () => {
     mockRpc.mockResolvedValue({ data: 'rep-1', error: null });
-    const result = await createDraftReport({ projectId: 'p1', workPerformed: 'noe' });
+    const result = await createDraftReport({ projectId: 'p1' });
     expect(result.ok).toBe(true);
     if (result.ok) expect(result.value).toBe('rep-1');
   });
@@ -110,7 +110,7 @@ describe('reports-api', () => {
       data: null,
       error: { message: 'Du har allerede en rapport for denne datoen på dette prosjektet' },
     });
-    const result = await createDraftReport({ projectId: 'p1', workPerformed: 'noe' });
+    const result = await createDraftReport({ projectId: 'p1' });
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.error).toContain('allerede en rapport');
   });

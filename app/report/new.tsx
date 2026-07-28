@@ -18,7 +18,10 @@ export default function NewReportScreen() {
         </Pressable>
         <Text variant="title">{t('overview.newReport')}</Text>
       </View>
-      <NewReportForm onCreated={() => router.back()} defaultProjectId={projectId} />
+      <NewReportForm
+        onCreated={(reportId) => router.replace(`/report/${reportId}`)}
+        defaultProjectId={projectId}
+      />
     </Screen>
   );
 }

@@ -49,6 +49,8 @@
   },
   "report": {
     "project": "Prosjekt",
+    "selectProject": "Velg et prosjekt",
+    "createReport": "Opprett rapport",
     "workPerformed": "Utført arbeid",
     "saveDraft": "Lagre utkast",
     "needProject": "Du trenger et prosjekt først",

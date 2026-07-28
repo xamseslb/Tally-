@@ -49,6 +49,8 @@
   },
   "report": {
     "project": "Project",
+    "selectProject": "Select a project",
+    "createReport": "Create report",
     "workPerformed": "Work performed",
     "saveDraft": "Save draft",
     "needProject": "You need a project first",
