@@ -5,8 +5,12 @@ describe('auth-skjemaer', () => {
     expect(signInSchema.safeParse({ email: 'ola@bygg.no', password: 'x' }).success).toBe(true);
   });
 
-  it('avviser ugyldig e-post', () => {
-    expect(signInSchema.safeParse({ email: 'ikke-epost', password: 'x' }).success).toBe(false);
+  it('godtar brukernavn (uten @)', () => {
+    expect(signInSchema.safeParse({ email: 'ahmed', password: 'x' }).success).toBe(true);
+  });
+
+  it('avviser tomt brukernavn/e-post', () => {
+    expect(signInSchema.safeParse({ email: '', password: 'x' }).success).toBe(false);
   });
 
   it('krever minst 8 tegn i passord ved registrering', () => {

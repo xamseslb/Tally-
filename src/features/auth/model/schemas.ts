@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-/** Skjemavalidering for innlogging/registrering. Feiltekster på norsk (spec §7). */
+/** Innlogging godtar brukernavn ELLER e-post (admin-styrt brukermodell). */
 export const signInSchema = z.object({
-  email: z.email('Skriv en gyldig e-postadresse'),
-  password: z.string().min(1, 'Skriv inn passordet'),
+  email: z.string().min(1, 'Enter your username or email'),
+  password: z.string().min(1, 'Enter your password'),
 });
 export type SignInInput = z.infer<typeof signInSchema>;
 

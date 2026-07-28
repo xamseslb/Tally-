@@ -66,6 +66,25 @@
   "chat": {
     "empty": "No messages yet."
   },
+  "team": {
+    "title": "Team",
+    "manage": "Manage users",
+    "newUser": "New user",
+    "fullName": "Full name",
+    "username": "Username",
+    "password": "Password",
+    "role": "Role",
+    "create": "Create user",
+    "empty": "No team members yet."
+  },
+  "roles": {
+    "admin": "Admin",
+    "manager": "Manager",
+    "engineer": "Engineer",
+    "supervisor": "Supervisor",
+    "worker": "Worker",
+    "client": "Client"
+  },
   "settings": {
     "title": "Settings",
     "deleteAccount": "Delete account",
@@ -77,6 +96,7 @@
     "signIn": "Sign in",
     "signOut": "Sign out",
     "email": "Email",
+    "emailOrUsername": "Username or email",
     "password": "Password",
     "magicLink": "Send sign-in link",
     "magicLinkSent": "Check your email — we sent a sign-in link.",

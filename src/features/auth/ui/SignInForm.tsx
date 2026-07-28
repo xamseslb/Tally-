@@ -49,14 +49,13 @@ export function SignInForm() {
         name="email"
         render={({ field: { onChange, onBlur, value } }) => (
           <Field
-            label={t('auth.email')}
+            label={t('auth.emailOrUsername')}
             value={value}
             onChangeText={onChange}
             onBlur={onBlur}
             error={errors.email?.message}
             autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
+            autoCorrect={false}
           />
         )}
       />

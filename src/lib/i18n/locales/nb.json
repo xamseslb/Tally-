@@ -66,6 +66,25 @@
   "chat": {
     "empty": "Ingen meldinger enda."
   },
+  "team": {
+    "title": "Team",
+    "manage": "Administrer brukere",
+    "newUser": "Ny bruker",
+    "fullName": "Fullt navn",
+    "username": "Brukernavn",
+    "password": "Passord",
+    "role": "Rolle",
+    "create": "Opprett bruker",
+    "empty": "Ingen teammedlemmer enda."
+  },
+  "roles": {
+    "admin": "Admin",
+    "manager": "Leder",
+    "engineer": "Ingeniør",
+    "supervisor": "Bas",
+    "worker": "Arbeider",
+    "client": "Byggherre"
+  },
   "settings": {
     "title": "Innstillinger",
     "deleteAccount": "Slett konto",
@@ -77,6 +96,7 @@
     "signIn": "Logg inn",
     "signOut": "Logg ut",
     "email": "E-post",
+    "emailOrUsername": "Brukernavn eller e-post",
     "password": "Passord",
     "magicLink": "Send innloggingslenke",
     "magicLinkSent": "Sjekk e-posten din — vi sendte en innloggingslenke.",

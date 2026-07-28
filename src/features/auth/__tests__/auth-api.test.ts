@@ -1,4 +1,13 @@
-import { deleteAccount, signInWithPassword } from '../api/auth-api';
+import { deleteAccount, signInWithPassword, toLoginEmail } from '../api/auth-api';
+
+describe('toLoginEmail', () => {
+  it('mapper brukernavn til syntetisk e-post', () => {
+    expect(toLoginEmail('Ahmed')).toBe('ahmed@users.tally.local');
+  });
+  it('lar en ekte e-post være uendret', () => {
+    expect(toLoginEmail('boss@firma.no')).toBe('boss@firma.no');
+  });
+});
 
 const mockSignInWithPassword = jest.fn();
 const mockInvoke = jest.fn();

@@ -4,9 +4,19 @@ import { err, ok, type Result } from '@/lib/result';
 import { mapAuthError } from './auth-errors';
 import type { MagicLinkInput, SignInInput, SignUpInput } from '../model/schemas';
 
-/** E-post + passord. */
+/** Brukernavn (uten @) mappes til en intern syntetisk e-post. */
+const USERNAME_DOMAIN = '@users.tally.local';
+export function toLoginEmail(usernameOrEmail: string): string {
+  const raw = usernameOrEmail.trim();
+  return raw.includes('@') ? raw : `${raw.toLowerCase()}${USERNAME_DOMAIN}`;
+}
+
+/** Brukernavn/e-post + passord. */
 export async function signInWithPassword(input: SignInInput): Promise<Result<void>> {
-  const { error } = await supabase.auth.signInWithPassword(input);
+  const { error } = await supabase.auth.signInWithPassword({
+    email: toLoginEmail(input.email),
+    password: input.password,
+  });
   return error ? err(mapAuthError(error.message)) : ok(undefined);
 }
 

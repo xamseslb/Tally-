@@ -1,13 +1,18 @@
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
 
 import { deleteAccount, signOut, useAuth } from '@/features/auth';
+import { useMembershipStore } from '@/features/organizations';
 import { Button, Card, Header, Screen, Text, spacing } from '@/ui';
 
-/** Profil — konto, utlogging og kontosletting (Apple 5.1.1(v)). */
+/** Profil — konto, teamadministrasjon, utlogging og kontosletting. */
 export default function ProfilScreen() {
   const { t } = useTranslation();
+  const router = useRouter();
   const { session } = useAuth();
+  const role = useMembershipStore((s) => s.membership?.role);
+  const canManage = role === 'admin' || role === 'manager';
 
   const confirmDelete = async (): Promise<void> => {
     const result = await deleteAccount();
@@ -36,6 +41,14 @@ export default function ProfilScreen() {
         </Text>
         <Text variant="heading">{session?.user.email ?? '—'}</Text>
       </Card>
+
+      {canManage ? (
+        <Button
+          label={t('team.manage')}
+          variant="secondary"
+          onPress={() => router.push('/admin/users')}
+        />
+      ) : null}
 
       <View style={{ gap: spacing.md }}>
         <Button label={t('auth.signOut')} variant="secondary" onPress={() => void signOut()} />
