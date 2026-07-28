@@ -44,6 +44,27 @@ const SignatureSchema = z.object({
   signed_content_hash: z.string(),
 });
 
+const ManpowerSchema = z.object({
+  id: z.string(),
+  trade: z.string(),
+  headcount: z.coerce.number(),
+  hours: z.coerce.number(),
+});
+const EquipmentSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  hours: z.coerce.number().nullable(),
+});
+const MaterialSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  quantity: z.coerce.number().nullable(),
+  unit: z.string().nullable(),
+});
+export type ManpowerRow = z.infer<typeof ManpowerSchema>;
+export type EquipmentRow = z.infer<typeof EquipmentSchema>;
+export type MaterialRow = z.infer<typeof MaterialSchema>;
+
 const ReportDetailSchema = z.object({
   id: z.string(),
   report_date: z.string(),
@@ -59,11 +80,14 @@ const ReportDetailSchema = z.object({
   author_id: z.string(),
   projects: z.object({ name: z.string() }).nullable(),
   signatures: z.array(SignatureSchema),
+  manpower: z.array(ManpowerSchema),
+  equipment: z.array(EquipmentSchema),
+  materials: z.array(MaterialSchema),
 });
 export type ReportDetail = z.infer<typeof ReportDetailSchema>;
 
 const REPORT_DETAIL_COLUMNS =
-  'id, report_date, status, work_performed, delays, hse_notes, quality_notes, supervisor_comment, notes, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash)';
+  'id, report_date, status, work_performed, delays, hse_notes, quality_notes, supervisor_comment, notes, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash), manpower:report_manpower(id, trade, headcount, hours), equipment:report_equipment(id, name, hours), materials:report_materials(id, name, quantity, unit)';
 
 export async function getReport(id: string): Promise<Result<ReportDetail | null>> {
   const { data, error } = await supabase
@@ -116,3 +140,51 @@ export const signReport = (id: string, role: 'performer' | 'approver', signature
 
 export const rejectReport = (id: string, note: string) =>
   callRpc('reject_report', { p_report_id: id, p_note: note });
+
+export async function addManpower(
+  reportId: string,
+  input: { trade: string; headcount: number; hours: number },
+): Promise<Result<void>> {
+  const { error } = await supabase.from('report_manpower').insert({
+    report_id: reportId,
+    trade: input.trade,
+    headcount: input.headcount,
+    hours: input.hours,
+  });
+  return error ? err('Could not add. Try again.') : ok(undefined);
+}
+
+export async function addEquipment(
+  reportId: string,
+  input: { name: string; hours?: number },
+): Promise<Result<void>> {
+  const { error } = await supabase
+    .from('report_equipment')
+    .insert({ report_id: reportId, name: input.name, hours: input.hours ?? null });
+  return error ? err('Could not add. Try again.') : ok(undefined);
+}
+
+export async function addMaterial(
+  reportId: string,
+  input: { name: string; quantity?: number; unit?: string },
+): Promise<Result<void>> {
+  const { error } = await supabase.from('report_materials').insert({
+    report_id: reportId,
+    name: input.name,
+    quantity: input.quantity ?? null,
+    unit: input.unit || null,
+  });
+  return error ? err('Could not add. Try again.') : ok(undefined);
+}
+
+export type LineKind = 'manpower' | 'equipment' | 'materials';
+const LINE_TABLE: Record<LineKind, string> = {
+  manpower: 'report_manpower',
+  equipment: 'report_equipment',
+  materials: 'report_materials',
+};
+
+export async function removeLineItem(kind: LineKind, id: string): Promise<Result<void>> {
+  const { error } = await supabase.from(LINE_TABLE[kind]).delete().eq('id', id);
+  return error ? err('Could not remove. Try again.') : ok(undefined);
+}

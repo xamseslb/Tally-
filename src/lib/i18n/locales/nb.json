@@ -70,7 +70,19 @@
     "safety": "HMS-observasjoner",
     "quality": "Kvalitetskontroll",
     "supervisorComment": "Bas-kommentar",
-    "notes": "Notat (valgfritt)"
+    "notes": "Notat (valgfritt)",
+    "labour": "Bemanning",
+    "equipment": "Utstyr og maskiner",
+    "materials": "Materialer",
+    "none": "Ingen lagt til.",
+    "trade": "Fag",
+    "headcount": "Antall",
+    "hours": "Timer",
+    "add": "Legg til",
+    "equipmentName": "Utstyr",
+    "materialName": "Materiale",
+    "quantity": "Mengde",
+    "unit": "Enhet"
   },
   "chat": {
     "empty": "Ingen meldinger enda."

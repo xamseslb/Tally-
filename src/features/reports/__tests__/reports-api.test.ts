@@ -1,6 +1,8 @@
 const mockOrder = jest.fn();
 const mockMaybeSingle = jest.fn();
 const mockUpdateEq = jest.fn();
+const mockInsert = jest.fn();
+const mockDeleteEq = jest.fn();
 const mockRpc = jest.fn();
 
 const chain = {
@@ -10,6 +12,8 @@ const chain = {
   order: (...args: unknown[]) => mockOrder(...args),
   maybeSingle: (...args: unknown[]) => mockMaybeSingle(...args),
   update: () => ({ eq: (...args: unknown[]) => mockUpdateEq(...args) }),
+  insert: (...args: unknown[]) => mockInsert(...args),
+  delete: () => ({ eq: (...args: unknown[]) => mockDeleteEq(...args) }),
 };
 
 jest.mock('@/lib/supabase', () => ({
@@ -20,10 +24,12 @@ jest.mock('@/lib/supabase', () => ({
 }));
 
 import {
+  addManpower,
   createDraftReport,
   getReport,
   listReports,
   rejectReport,
+  removeLineItem,
   signReport,
   submitReport,
   updateReport,
@@ -34,13 +40,25 @@ describe('reports-api', () => {
     mockOrder.mockReset();
     mockMaybeSingle.mockReset();
     mockUpdateEq.mockReset();
+    mockInsert.mockReset();
+    mockDeleteEq.mockReset();
     mockRpc.mockReset();
     mockRpc.mockResolvedValue({ data: null, error: null });
     mockUpdateEq.mockResolvedValue({ error: null });
+    mockInsert.mockResolvedValue({ error: null });
+    mockDeleteEq.mockResolvedValue({ error: null });
   });
 
   it('updateReport lagrer feltene', async () => {
     expect((await updateReport('r1', { workPerformed: 'Støp', delays: 'Regn' })).ok).toBe(true);
+  });
+
+  it('addManpower legger til en bemanningslinje', async () => {
+    expect((await addManpower('r1', { trade: 'Betong', headcount: 3, hours: 8 })).ok).toBe(true);
+  });
+
+  it('removeLineItem fjerner en linje', async () => {
+    expect((await removeLineItem('equipment', 'e1')).ok).toBe(true);
   });
 
   it('listReports parser rader med prosjektnavn', async () => {
@@ -101,6 +119,9 @@ describe('reports-api', () => {
             signed_content_hash: 'abc123',
           },
         ],
+        manpower: [{ id: 'm1', trade: 'Betong', headcount: 3, hours: 8 }],
+        equipment: [],
+        materials: [],
       },
       error: null,
     });

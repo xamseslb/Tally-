@@ -70,7 +70,19 @@
     "safety": "Safety observations",
     "quality": "Quality inspection notes",
     "supervisorComment": "Supervisor comment",
-    "notes": "Notes (optional)"
+    "notes": "Notes (optional)",
+    "labour": "Labour attendance",
+    "equipment": "Equipment & machinery",
+    "materials": "Materials",
+    "none": "None added.",
+    "trade": "Trade",
+    "headcount": "Headcount",
+    "hours": "Hours",
+    "add": "Add",
+    "equipmentName": "Equipment name",
+    "materialName": "Material name",
+    "quantity": "Quantity",
+    "unit": "Unit"
   },
   "chat": {
     "empty": "No messages yet."

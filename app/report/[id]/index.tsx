@@ -8,6 +8,7 @@ import { useAuth } from '@/features/auth';
 import {
   EditReportForm,
   ReportFieldsView,
+  ReportLineItems,
   type ReportDetail,
   rejectReport,
   signReport,
@@ -139,6 +140,8 @@ function Content({
       ) : (
         <ReportFieldsView report={report} />
       )}
+
+      <ReportLineItems report={report} editable={editable} onChanged={onSaved} />
 
       {report.review_note ? (
         <Card>
