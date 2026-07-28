@@ -64,7 +64,13 @@
     "signedBy": "Signert av",
     "documentHash": "Dokument-hash",
     "returnedNote": "Returnert med kommentar",
-    "noWork": "Ingen arbeid beskrevet."
+    "noWork": "Ingen arbeid beskrevet.",
+    "save": "Lagre",
+    "delays": "Forsinkelser / avvik",
+    "safety": "HMS-observasjoner",
+    "quality": "Kvalitetskontroll",
+    "supervisorComment": "Bas-kommentar",
+    "notes": "Notat (valgfritt)"
   },
   "chat": {
     "empty": "Ingen meldinger enda."

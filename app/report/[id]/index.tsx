@@ -6,6 +6,8 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { useAuth } from '@/features/auth';
 import {
+  EditReportForm,
+  ReportFieldsView,
   type ReportDetail,
   rejectReport,
   signReport,
@@ -89,6 +91,7 @@ export default function ReportDetailScreen() {
           onSubmit={onSubmit}
           onSign={onSign}
           onReject={onReject}
+          onSaved={() => void refetch()}
         />
       ) : null}
     </Screen>
@@ -102,6 +105,7 @@ function Content({
   onSubmit,
   onSign,
   onReject,
+  onSaved,
 }: {
   report: ReportDetail;
   isAuthor: boolean;
@@ -109,8 +113,10 @@ function Content({
   onSubmit: () => void;
   onSign: () => void;
   onReject: () => void;
+  onSaved: () => void;
 }) {
   const { t } = useTranslation();
+  const editable = report.status === 'draft' && isAuthor;
   return (
     <>
       <Card>
@@ -128,12 +134,11 @@ function Content({
         </Text>
       </Card>
 
-      <Card>
-        <Text variant="label" color="slate">
-          {t('report.workPerformed')}
-        </Text>
-        <Text variant="body">{report.work_performed || t('report.noWork')}</Text>
-      </Card>
+      {editable ? (
+        <EditReportForm report={report} onSaved={onSaved} />
+      ) : (
+        <ReportFieldsView report={report} />
+      )}
 
       {report.review_note ? (
         <Card>

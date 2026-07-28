@@ -1,5 +1,6 @@
 const mockOrder = jest.fn();
 const mockMaybeSingle = jest.fn();
+const mockUpdateEq = jest.fn();
 const mockRpc = jest.fn();
 
 const chain = {
@@ -8,6 +9,7 @@ const chain = {
   eq: () => chain,
   order: (...args: unknown[]) => mockOrder(...args),
   maybeSingle: (...args: unknown[]) => mockMaybeSingle(...args),
+  update: () => ({ eq: (...args: unknown[]) => mockUpdateEq(...args) }),
 };
 
 jest.mock('@/lib/supabase', () => ({
@@ -24,14 +26,21 @@ import {
   rejectReport,
   signReport,
   submitReport,
+  updateReport,
 } from '../api/reports-api';
 
 describe('reports-api', () => {
   beforeEach(() => {
     mockOrder.mockReset();
     mockMaybeSingle.mockReset();
+    mockUpdateEq.mockReset();
     mockRpc.mockReset();
     mockRpc.mockResolvedValue({ data: null, error: null });
+    mockUpdateEq.mockResolvedValue({ error: null });
+  });
+
+  it('updateReport lagrer feltene', async () => {
+    expect((await updateReport('r1', { workPerformed: 'Støp', delays: 'Regn' })).ok).toBe(true);
   });
 
   it('listReports parser rader med prosjektnavn', async () => {
@@ -76,6 +85,11 @@ describe('reports-api', () => {
         report_date: '2026-07-23',
         status: 'signed',
         work_performed: 'Forskaling',
+        delays: null,
+        hse_notes: null,
+        quality_notes: null,
+        supervisor_comment: null,
+        notes: null,
         content_hash: 'abc123',
         review_note: null,
         author_id: 'u1',

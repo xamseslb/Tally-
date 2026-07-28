@@ -49,6 +49,11 @@ const ReportDetailSchema = z.object({
   report_date: z.string(),
   status: z.string(),
   work_performed: z.string().nullable(),
+  delays: z.string().nullable(),
+  hse_notes: z.string().nullable(),
+  quality_notes: z.string().nullable(),
+  supervisor_comment: z.string().nullable(),
+  notes: z.string().nullable(),
   content_hash: z.string().nullable(),
   review_note: z.string().nullable(),
   author_id: z.string(),
@@ -57,12 +62,13 @@ const ReportDetailSchema = z.object({
 });
 export type ReportDetail = z.infer<typeof ReportDetailSchema>;
 
+const REPORT_DETAIL_COLUMNS =
+  'id, report_date, status, work_performed, delays, hse_notes, quality_notes, supervisor_comment, notes, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash)';
+
 export async function getReport(id: string): Promise<Result<ReportDetail | null>> {
   const { data, error } = await supabase
     .from('daily_reports')
-    .select(
-      'id, report_date, status, work_performed, content_hash, review_note, author_id, projects(name), signatures(signer_role, signed_at, signed_content_hash)',
-    )
+    .select(REPORT_DETAIL_COLUMNS)
     .eq('id', id)
     .is('deleted_at', null)
     .maybeSingle();
@@ -71,6 +77,31 @@ export async function getReport(id: string): Promise<Result<ReportDetail | null>
   if (!data) return ok(null);
   const parsed = ReportDetailSchema.safeParse(data);
   return parsed.success ? ok(parsed.data) : err('Unexpected response from server.');
+}
+
+export interface ReportFields {
+  workPerformed?: string;
+  delays?: string;
+  hseNotes?: string;
+  qualityNotes?: string;
+  supervisorComment?: string;
+  notes?: string;
+}
+
+export async function updateReport(id: string, input: ReportFields): Promise<Result<void>> {
+  const { error } = await supabase
+    .from('daily_reports')
+    .update({
+      work_performed: input.workPerformed || null,
+      delays: input.delays || null,
+      hse_notes: input.hseNotes || null,
+      quality_notes: input.qualityNotes || null,
+      supervisor_comment: input.supervisorComment || null,
+      notes: input.notes || null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id);
+  return error ? err('Could not save the report. Try again.') : ok(undefined);
 }
 
 async function callRpc(fn: string, args: Record<string, unknown>): Promise<Result<void>> {

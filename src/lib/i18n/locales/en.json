@@ -64,7 +64,13 @@
     "signedBy": "Signed by",
     "documentHash": "Document hash",
     "returnedNote": "Returned with note",
-    "noWork": "No work described."
+    "noWork": "No work described.",
+    "save": "Save",
+    "delays": "Delays / issues",
+    "safety": "Safety observations",
+    "quality": "Quality inspection notes",
+    "supervisorComment": "Supervisor comment",
+    "notes": "Notes (optional)"
   },
   "chat": {
     "empty": "No messages yet."
